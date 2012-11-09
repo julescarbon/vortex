@@ -3,7 +3,7 @@
 	var g = root.document.getElementById("gyre");
 
 	var Falcon = function (gyre) {
-		this.flaps = [ '------', '/‾\\/‾\\', '‾‾\\/‾‾' ];
+		this.flaps = [ ':o\\-&lt;', ':O/-&lt;', ';(|-&lt;' ];
 		this.flap_i = 0;
 		this.flap_rate = 230;
 		this.veer_rate = 500;
@@ -22,11 +22,19 @@
 			[ "top", "left" ].forEach(function (s) { 
 				_this.el.style[s] = (50 + (root.Math.random() < 0.5 ? -1 : 1) * root.Math.random() * 80) + "%"; 
 			});
+			this.el.style.WebkitTransform = 'rotate(' +  (1.0 - 2.0 * root.Math.random()) * 360 + "deg)";
+			this.el.style.transform = 'rotate(' +  (1.0 - 2.0 * root.Math.random()) * 360 + "deg)";
 			this.gyre.appendChild(this.el);
+      setTimeout(function(){
+  			_this.el.style.WebkitTransform = 'rotate(' +  (1.0 - 2.0 * root.Math.random()) * 360 + "deg)";
+  			_this.el.style.transform = 'rotate(' +  (1.0 - 2.0 * root.Math.random()) * 360 + "deg)";
+      }, 50)
 			return this;
 		},
 		flap: function () { 
-			this.el.innerHTML = this.flaps[this.flap_i++ % this.flaps.length];
+      if (Math.random() > 0.3) {
+  			this.el.innerHTML = this.flaps[Math.floor(Math.random() * this.flaps.length)];
+      }
 		},
 		veer: function () {
 			this.el.style.marginTop = root.Math.random() * this.veer_coefficient_vertical / root.Math.log(this.flap_i + 1) + "px";
@@ -54,3 +62,4 @@
 	root.setInterval(launch, 730);
 
 }).call(this);
+
